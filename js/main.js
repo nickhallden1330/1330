@@ -4,6 +4,7 @@ let elInp1 = document.querySelector('.js-inp1');
 let elInp2 = document.querySelector('.js-inp2');
 let elForm = document.querySelector('.js-form');
 let elBtn = document.querySelector('.js-btn');
+const itemFragment = document.createDocumentFragment();
 var theme = false;
 
 const localData = JSON.parse(window.localStorage.getItem('List'));
@@ -38,8 +39,9 @@ const newFunc = (arr, node) => {
 		elItem.appendChild(elText);
 		elItem.appendChild(elLink);
 		elItem.appendChild(elBtn);
-		node.appendChild(elItem);
+		itemFragment.appendChild(elItem);
 	});
+	node.appendChild(itemFragment);
 };
 
 newFunc(users, elList);
@@ -85,18 +87,17 @@ elList.addEventListener('click', function (evt) {
 	}
 });
 
-elBtn.addEventListener('click' , () => {
-	theme = !theme
-	window.localStorage.setItem('theme' , theme ? 'dark' : 'light')
-	changeTheme()
-})
+elBtn.addEventListener('click', () => {
+	theme = !theme;
+	window.localStorage.setItem('theme', theme ? 'dark' : 'light');
+	changeTheme();
+});
 
 function changeTheme() {
-	if(window.localStorage.getItem('theme') == 'dark') {
-		document.body.classList.add('dark')
-	}
-	else{
-		document.body.classList.remove('dark')
+	if (window.localStorage.getItem('theme') == 'dark') {
+		document.body.classList.add('dark');
+	} else {
+		document.body.classList.remove('dark');
 	}
 }
-changeTheme()
+changeTheme();
